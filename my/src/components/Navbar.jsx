@@ -8,9 +8,12 @@ import {
   FaXmark,
   FaListUl,
 } from "react-icons/fa6";
+import Modal from "./Modal";
 
 const Navbar = () => {
   const [isMenu, setIsMenu] = useState(false);
+
+  const [isModalOpen,setIsModalOpen] = useState(false);
 
   const toggle = () => {
     setIsMenu(!isMenu);
@@ -22,6 +25,14 @@ const Navbar = () => {
     { path: "/blogs", link: "Blog" },
     { path: "/contact", link: "Contact" },
   ];
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () =>{
+    setIsModalOpen(false)
+  }
 
   return (
     <>
@@ -56,13 +67,16 @@ const Navbar = () => {
             <a href="/" className="hover:text-orange-500">
               <FaTwitter />{" "}
             </a>
-            <button
+            <button onClick={openModal}
               className="bg-orange-500 px-6 py-2 font-medium rounded hover:bg-white hover:text-orange-500
             translate-all duration-200 ease-in"
             >
               Log in
             </button>
           </div>
+
+
+          <Modal onClose={closeModal} isOpen={isModalOpen}/>
 
           <div className="md:hidden">
             <button onClick={toggle} className="cursor-pointer">
